@@ -39,12 +39,16 @@ Cette application Django permet de rechercher des articles sur des sujets préci
      NEWS_API_KEY=votre_clé_api_secrète
      ```
 
-5. **Migrer la base de données (si applicable)**
+5. **Modifier la variable `query` dans `views.py`**
+    ```python
+   query = 'machine learning OR deep learning'   #exemple de sujet
+   ```
+6. **Migrer la base de données (si applicable)**
    ```bash
    python manage.py migrate
    ```
 
-6. **Lancer le serveur de développement**
+7. **Lancer le serveur de développement**
    ```bash
    python manage.py runserver
    ```
