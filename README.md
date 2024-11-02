@@ -54,7 +54,7 @@ Cette application Django permet de rechercher des articles sur des sujets préci
    ```
 
 ## Utilisation
-- Accédez à l'application à l'adresse [http://127.0.0.1:8000/news/search/](http://127.0.0.1:8000/news/search/).
+- Accédez à l'application à l'adresse [http://127.0.0.1:8000](http://127.0.0.1:8000).
 - La page affichera les articles liés à votre mot-clé prédéfini.
 
 ## Structure du projet
