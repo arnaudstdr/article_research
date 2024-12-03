@@ -16,7 +16,7 @@ def search_news_view(request):
         'from': from_date,
         'to': to_date,
         'language': 'fr',
-        'sortBy': 'relevance',
+        'sortBy': 'publishedAt',
         'apiKey': api_key,
         'pageSize': '50'
     }
