@@ -21,4 +21,5 @@ from news.views import search_news
 urlpatterns = [
     path('', search_news, name='home'),
     path('news/', include('news.urls')),
+    path('admin/', admin.site.urls),
 ]
