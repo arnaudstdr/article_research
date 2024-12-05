@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import search_news_view
+from .views import search_news
 
 urlpatterns = [
-    path('search/', search_news_view, name='search_news'),
+    path('search/', search_news, name='search_news'),
 ]

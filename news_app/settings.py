@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os
 
 # Charger la clé API
 NEWS_API_KEY = config('NEWS_API_KEY')
@@ -59,8 +60,8 @@ ROOT_URLCONF = 'news_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Répertoire global des templates
+        'APP_DIRS': True,  # Activer la recherche dans les dossiers templates des applications
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -120,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

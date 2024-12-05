@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from news.views import search_news_view
+from news.views import search_news
 
 urlpatterns = [
-    path('', search_news_view, name='home'),
+    path('', search_news, name='home'),
     path('news/', include('news.urls')),
 ]
