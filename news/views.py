@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 import requests
 from django.conf import settings
 from .models import FavoriteQuery
 
 # Create your views here.
+@login_required
 def search_news(request):
     query = request.GET.get('query', '')
     articles = []
-    favorites = FavoriteQuery.objects.all()
+    favorites = FavoriteQuery.objects.filter(user=request.user)
 
     if query:
         api_key = settings.NEWS_API_KEY
@@ -23,8 +26,8 @@ def search_news(request):
             print(f"Erreur lors de la requête API: {e}")
 
     if 'add_favorite' in request.GET and query:
-        if not FavoriteQuery.objects.filter(query=query).exists():
-            FavoriteQuery.objects.create(query=query)
+        if not FavoriteQuery.objects.filter(user=request.user, query=query).exists():
+            FavoriteQuery.objects.create(user=request.user, query=query)
         return redirect('search_news')
 
     articles = sorted(
@@ -39,11 +42,12 @@ def search_news(request):
         'favorites': favorites,
     })
 
+@login_required
 def delete_favorite(request, favorite_id):
     try:
-        favorite = FavoriteQuery.objects.get(id=favorite_id)
+        favorite = FavoriteQuery.objects.get(id=favorite_id, user=request.user)
         favorite.delete()
     except FavoriteQuery.DoesNotExist:
-        pass
+        return HttpResponseForbidden("Vous n'avez pas la permission de supprimer ce favori.")
     return redirect('search_news')
 
